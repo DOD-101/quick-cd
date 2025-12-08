@@ -17,4 +17,6 @@ local plugin = {}
 plugin.utils = require("quick-cd.utils")
 plugin.points = require("quick-cd.points")
 
+require("quick-cd.cmd")
+
 return plugin
