@@ -11,7 +11,7 @@ local points = {}
 
 local utils = require("quick-cd.utils")
 
-points.git_root = {
+points.git = {
 	desc = utils.make_point_desc("Root directory of the git repository"),
 	fn = function()
 		local handle = io.popen("git rev-parse --show-toplevel 2> /dev/null")
