@@ -69,4 +69,18 @@ points.buffer = {
 	end,
 }
 
+points.npm = {
+	desc = utils.make_point_desc("Root directory of npm package"),
+	fn = function()
+		local locations = utils.file_in_parent_dirs("package.json", utils.buffer_path())
+
+		if not locations or #locations == 0 then
+			utils.print_failed("npm package root")
+			return
+		end
+
+		utils.change_to_dir(locations[1])
+	end,
+}
+
 return points
