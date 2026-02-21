@@ -14,7 +14,8 @@
 --- Options passed to setup
 ---
 --- @class SetupOpts
---- @field points {[string]: Point} Additional points
+--- @field points {[string]: Point}? Additional points
+--- @field autocd string? Name of point to cd on nvim launch. You *must* disable lazy-loading for this to work.
 
 -- Main plugin code
 
@@ -33,6 +34,14 @@ function plugin.setup(opts)
 	end
 
 	require("quick-cd.cmd")
+
+	if opts.autocd then
+		vim.api.nvim_create_autocmd("VimEnter", {
+			callback = function()
+				vim.cmd("Qcd " .. opts.autocd)
+			end,
+		})
+	end
 end
 
 return plugin
