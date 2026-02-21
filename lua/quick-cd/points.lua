@@ -11,6 +11,22 @@ local points = {}
 
 local utils = require("quick-cd.utils")
 
+points.up = {
+	desc = "Go up one dir",
+	fn = function()
+		local parents = utils.dir_parents_rev(utils.cwd())
+
+		local dir = parents[2]
+
+		if not dir then
+			utils.print_failed("one dir up.")
+			return
+		end
+
+		utils.change_to_dir(dir)
+	end,
+}
+
 points.git = {
 	desc = utils.make_point_desc("Root directory of the git repository"),
 	fn = function()
@@ -75,7 +91,7 @@ points.npm = {
 		local locations = utils.file_in_parent_dirs("package.json", utils.buffer_path())
 
 		if not locations or #locations == 0 then
-			utils.print_failed("npm package root")
+			utils.print_failed("npm package root.")
 			return
 		end
 
@@ -92,7 +108,7 @@ points.deno = {
 		vim.list_extend(locations, utils.file_in_parent_dirs("deno.lock", utils.buffer_path()))
 
 		if not locations or #locations == 0 then
-			utils.print_failed("deno package root")
+			utils.print_failed("deno package root.")
 			return
 		end
 
