@@ -83,4 +83,21 @@ points.npm = {
 	end,
 }
 
+points.deno = {
+	desc = utils.make_point_desc("Root directory of deno package"),
+	fn = function()
+		local locations = utils.file_in_parent_dirs("deno.json", utils.buffer_path())
+
+		---@diagnostic disable-next-line: param-type-mismatch
+		vim.list_extend(locations, utils.file_in_parent_dirs("deno.lock", utils.buffer_path()))
+
+		if not locations or #locations == 0 then
+			utils.print_failed("deno package root")
+			return
+		end
+
+		utils.change_to_dir(locations[1])
+	end,
+}
+
 return points
