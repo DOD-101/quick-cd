@@ -1,7 +1,7 @@
----@module "lazy"
----@type LazyPluginSpec
+---@module "lazy.core.plugin"
+---@type PluginOpts
 return {
 	"dod-101/quick-cd",
 	lazy = true,
-	cmd = { "Qcd" },
+	cmd = { "Qcd", "QcdTelescope" },
 }

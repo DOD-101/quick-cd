@@ -15,6 +15,7 @@
 ---
 --- @class SetupOpts
 --- @field points {[string]: Point}? Additional points
+--- @field telescope_theme string? Theme to use for `QcdTelescope`
 --- @field autocd string? Name of point to cd on nvim launch. You *must* disable lazy-loading for this to work.
 
 -- Main plugin code
@@ -31,6 +32,17 @@ function plugin.setup(opts)
 		for k, v in pairs(opts.points) do
 			plugin.points[k] = v
 		end
+	end
+
+	if pcall(require, "telescope") then
+		plugin.telescope = function()
+			require("quick-cd.telescope")(opts.telescope_theme)
+		end
+
+		vim.api.nvim_create_user_command("QcdTelescope", plugin.telescope, {
+			desc = "Quick cd via vim.ui.select",
+			nargs = 0,
+		})
 	end
 
 	require("quick-cd.cmd")
