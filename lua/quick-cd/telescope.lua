@@ -32,7 +32,7 @@ local function picker(theme)
 
 	pickers
 		.new(opts, {
-			prompt_title = "colors",
+			prompt_title = "Quick cd",
 			finder = finders.new_table({
 				results = results,
 			}),
